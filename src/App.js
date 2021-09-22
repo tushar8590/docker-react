@@ -14,8 +14,9 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-         The changes made in feature branch
+          Learn React
         </a>
+        <span>The changes made in feature branch</span>
       </header>
     </div>
   );
