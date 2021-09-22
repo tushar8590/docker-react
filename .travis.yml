@@ -5,19 +5,7 @@ services:
   - docker
 
 before_install:
-  - docker build -t stephengrider/docker-react -f Dockerfile.dev .
+  - docker build -t practicaljava/docker-react -f Dockerfile .
 
 script:
-  - docker run -e CI=true stephengrider/docker-react npm run test
-
-deploy:
-  provider: elasticbeanstalk
-  region: 'us-west-2'
-  app: 'docker-react'
-  env: 'dockerreact-env'
-  bucket_name: 'elasticbeanstalk-us-west-2-987484768899'
-  bucket_path: 'docker'
-  on:
-    branch: main
-  access_key_id: $AWS_ACCESS_KEY
-  secret_access_key: $AWS_SECRET_KEY
+  - docker run -e CI=true practicaljava/docker-react npm run test
