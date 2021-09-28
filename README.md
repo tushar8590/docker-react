@@ -1,70 +1,23 @@
-# Getting Started with Create React App
+<h2> Multicontainer Docker Deployment to AWS </h2>
+Multicontainer setup and AWS deployment(project complex for Fibonacci calculation) :
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+1. Push code to github
+2. travis automaticallys pulls repo
+3. Travis builds a test image, test code
+4. Travis builds prod images
+5. Travis pushes project to AWS Elastci beanstalk
+6. EB pulls image from Docker hub, deploy
 
-## Available Scripts
+The Beanstalk doesn't know how to run containers so it delegates the task to amazon ECS(Elastic container service)
 
-In the project directory, you can run:
+There should be a  single docker-compose.yml file on project level and each module should contain specific Dockerfile
 
-### `npm start`
+The Dockerfile.dev and docker-compose-dev.yml are for dev environment. They will not be honoured by AWS.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<h3>AWS Configuration Cheat Sheet - Updated for new UI</h3>
+https://tm.udemy.com/course/docker-and-kubernetes-the-complete-guide/learn/lecture/21321244#overview
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+We generally don't deploy / host our own copy of RDS(postgress in this case) or redis cache, but we rather rely on AWS Elastic cache for redis and AWS Relational database service for Postgress
 
-### `npm test`
+* When creating our Elastic Beanstalk environment we need to select Docker running on 64bit Amazon Linux 2
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
